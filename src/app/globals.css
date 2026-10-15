@@ -1,0 +1,435 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Design tokens. Three themes × two modes, keyed on <html> attributes:
+   data-theme="nebula|matrix|sunset"  data-mode="dark|light"
+   ------------------------------------------------------------------ */
+
+:root,
+[data-theme="nebula"] {
+  --bg: #05060f;
+  --surface: #0b0e1d;
+  --elevated: #11152a;
+  --border: #1d2242;
+  --fg: #e6e9f5;
+  --muted: #9aa3c0;
+  --subtle: #7a83a6;
+  --accent: #22d3ee;
+  --accent-2: #8b5cf6;
+  --accent-fg: #05060f;
+  --net-strength: 1;
+  color-scheme: dark;
+}
+
+[data-theme="nebula"][data-mode="light"] {
+  --bg: #f5f7ff;
+  --surface: #ffffff;
+  --elevated: #eef1fb;
+  --border: #dde2f2;
+  --fg: #0b1026;
+  --muted: #475070;
+  --subtle: #5d6687;
+  --accent: #0e7490;
+  --accent-2: #7c3aed;
+  --accent-fg: #ffffff;
+  --net-strength: 0.75;
+  color-scheme: light;
+}
+
+[data-theme="matrix"] {
+  --bg: #030806;
+  --surface: #07120d;
+  --elevated: #0b1a13;
+  --border: #16301f;
+  --fg: #d9fbe8;
+  --muted: #8fb5a2;
+  --subtle: #6f9482;
+  --accent: #10b981;
+  --accent-2: #a3e635;
+  --accent-fg: #03130b;
+  --net-strength: 1;
+  color-scheme: dark;
+}
+
+[data-theme="matrix"][data-mode="light"] {
+  --bg: #f3fbf6;
+  --surface: #ffffff;
+  --elevated: #e8f5ee;
+  --border: #cfe6d9;
+  --fg: #052e1c;
+  --muted: #3f5f50;
+  --subtle: #557566;
+  --accent: #047857;
+  --accent-2: #4d7c0f;
+  --accent-fg: #ffffff;
+  --net-strength: 0.75;
+  color-scheme: light;
+}
+
+[data-theme="sunset"] {
+  --bg: #0b0a0f;
+  --surface: #13111a;
+  --elevated: #1b1824;
+  --border: #2b2534;
+  --fg: #f5f3f0;
+  --muted: #b3abb8;
+  --subtle: #8f8696;
+  --accent: #f59e0b;
+  --accent-2: #ec4899;
+  --accent-fg: #1a0f05;
+  --net-strength: 1;
+  color-scheme: dark;
+}
+
+[data-theme="sunset"][data-mode="light"] {
+  --bg: #fdf8f4;
+  --surface: #ffffff;
+  --elevated: #f8efe8;
+  --border: #eedfd3;
+  --fg: #1f1414;
+  --muted: #5c4b4b;
+  --subtle: #77635f;
+  --accent: #b45309;
+  --accent-2: #be185d;
+  --accent-fg: #ffffff;
+  --net-strength: 0.75;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-border: var(--border);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-fg: var(--accent-fg);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ------------------------------------------------------------------ base */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Matrix theme: faint CRT scanlines over the page (dark mode only). */
+[data-theme="matrix"]:not([data-mode="light"]) body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgb(16 185 129 / 0.035) 2px 3px
+  );
+}
+
+/* ------------------------------------------------------------------ layout helpers */
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  @media (min-width: 640px) {
+    .container-x {
+      padding-left: max(1.5rem, env(safe-area-inset-left));
+      padding-right: max(1.5rem, env(safe-area-inset-right));
+    }
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gradient-accent {
+    background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  }
+
+  /* Subtle blueprint grid, faded at the edges. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--border) 70%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--border) 70%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  }
+
+  .card {
+    position: relative;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border);
+    background: color-mix(in oklab, var(--surface) 88%, transparent);
+  }
+
+  /* Cursor-following border glow; position is fed by <Providers />. Only built on
+     hover-capable devices, so phones skip these extra masked layers entirely. */
+  @media (hover: hover) {
+    .spotlight::before,
+    .spotlight::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .spotlight::before {
+      padding: 1px;
+      background: radial-gradient(
+        320px circle at var(--mx, 50%) var(--my, 50%),
+        var(--accent),
+        color-mix(in oklab, var(--accent-2) 60%, transparent) 35%,
+        transparent 65%
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .spotlight::after {
+      background: radial-gradient(
+        420px circle at var(--mx, 50%) var(--my, 50%),
+        color-mix(in oklab, var(--accent) 9%, transparent),
+        transparent 60%
+      );
+    }
+
+    .spotlight:hover::before,
+    .spotlight:hover::after {
+      opacity: 1;
+    }
+  }
+
+  /* Below-the-fold sections skip style/layout/paint until they near the viewport. */
+  .lazy-render {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1000px;
+  }
+
+  .glass {
+    background: color-mix(in oklab, var(--bg) 72%, transparent);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+  }
+
+  @media (min-width: 768px) {
+    .glass {
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ keyframes */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes ping-soft {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes flow {
+  from {
+    transform: translateX(-6px);
+  }
+  to {
+    transform: translateX(24px);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+}
+
+[data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transform: none;
+    transition: opacity 0.3s linear;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-pop {
+  animation: pop 0.16s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out both;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+.caret {
+  animation: caret 1s steps(1) infinite;
+}
+
+.ping-soft {
+  animation: ping-soft 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.flow-dot {
+  animation: flow 1.8s linear infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 0%,
+    var(--muted) 35%,
+    var(--accent) 50%,
+    var(--muted) 65%,
+    var(--muted) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-pop,
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-marquee,
+  .caret,
+  .ping-soft,
+  .flow-dot,
+  .shimmer-text {
+    animation: none !important;
+  }
+  .shimmer-text {
+    color: var(--muted);
+  }
+}
