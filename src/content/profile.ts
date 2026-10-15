@@ -10,14 +10,14 @@ import type { Profile } from "./types";
  * ─────────────────────────────────────────────────────────────────────────
  */
 export const profile: Profile = {
-  name: "Alex Morgan", // TODO
-  firstName: "Alex", // TODO
+  name: "Shashank S", // TODO
+  firstName: "Shashank", // TODO
   role: "GenAI Engineer", // TODO
-  company: "Nimbus AI Labs", // TODO
+  company: "Wipro Limited", // TODO
   companyUrl: "https://example.com", // TODO (optional)
   location: "Bengaluru, India", // TODO
-  yearsOfExperience: 4, // TODO
-  openToWork: true, // shows the "Open to opportunities" badge
+  yearsOfExperience: 2, // TODO
+  openToWork: false, // shows the "Open to opportunities" badge
   availability: "Open to new opportunities — remote, hybrid or on-site.", // TODO
 
   tagline:
@@ -25,6 +25,7 @@ export const profile: Profile = {
 
   // Cycled by the "decoding" animation in the hero.
   rotatingRoles: [
+    "AI Engineer",
     "GenAI Engineer",
     "LLM Application Developer",
     "RAG Systems Builder",
@@ -41,26 +42,28 @@ export const profile: Profile = {
   resume: "/resume.pdf", // TODO: replace public/resume.pdf with your CV
 
   contact: {
-    email: "hello@example.com", // TODO
-    phone: "+91 90000 00000", // TODO (never rendered as plain text in HTML)
-    linkedin: "https://www.linkedin.com/in/your-handle", // TODO
-    github: "https://github.com/your-handle", // TODO
+    email: "shashu.s08@gmail.com", // TODO
+    phone: "+91 9483071522", // TODO (never rendered as plain text in HTML)
+    linkedin: "https://www.linkedin.com/in/shashank8602", // TODO
+    github: "https://github.com/Shashank8602", // TODO
   },
 
   // TODO: 4 headline numbers.
   metrics: [
-    { value: 4, suffix: "+", label: "Years shipping ML & GenAI" },
-    { value: 12, label: "LLM apps in production" },
-    { value: 50, suffix: "K+", label: "Monthly AI-assisted users" },
-    { value: 38, suffix: "%", label: "Avg. inference cost cut" },
+    { value: 1.5, suffix: "+", label: "Years exploring GenAI" },
+    // { value: 12, label: "LLM apps in production" },
+    // { value: 50, suffix: "K+", label: "Monthly AI-assisted users" },
+    // { value: 38, suffix: "%", label: "Avg. inference cost cut" },
   ],
 
   exploring: [
+    "LangGraph",
+    "RAG",
     "Agentic workflows",
     "Model Context Protocol",
     "LLM evals & observability",
-    "Small language models",
-    "Multimodal RAG",
+    // "Small language models",
+    // "Multimodal RAG",
     "Structured outputs",
   ],
 
@@ -73,15 +76,16 @@ export const profile: Profile = {
       featured: true,
       blurb: "Designing, prompting, adapting and evaluating foundation models.",
       items: [
+        "Langchain",
+        "Vector DB",
+        "Prompt engineering",
         "OpenAI GPT",
         "Claude",
         "Gemini",
-        "Llama",
-        "Mistral",
-        "Prompt engineering",
         "Fine-tuning (LoRA / QLoRA)",
         "RAG",
         "AI agents",
+        "Tools",
         "Function calling",
       ],
     },
@@ -89,25 +93,40 @@ export const profile: Profile = {
       title: "Languages",
       icon: "code",
       blurb: "Production code, data wrangling and glue.",
-      items: ["Python", "TypeScript", "SQL", "JavaScript", "Bash"],
+      items: ["Python", "SQL"],
     },
     {
       title: "Frameworks",
       icon: "workflow",
       blurb: "Orchestration and serving.",
-      items: ["LangChain", "LangGraph", "LlamaIndex", "Hugging Face", "FastAPI", "Streamlit"],
+      items: ["LangChain", "LangGraph", "Hugging Face", "FastAPI", "Streamlit"],
     },
     {
       title: "ML & Deep Learning",
       icon: "brain",
       blurb: "Training and adapting models.",
-      items: ["PyTorch", "TensorFlow", "scikit-learn", "Transformers", "Pandas", "NumPy"],
+      items: [
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Supervised Learning",
+        "Model Training",
+        "Transformers",
+      ],
     },
     {
       title: "Data & Vector DBs",
       icon: "database",
       blurb: "Retrieval and storage at scale.",
-      items: ["Qdrant", "Pinecone", "ChromaDB", "pgvector", "PostgreSQL", "Redis", "Elasticsearch"],
+      items: [
+        "Qdrant",
+        "Pinecone",
+        "ChromaDB",
+        "pgvector",
+        "PostgreSQL",
+        "Redis",
+        "Elasticsearch",
+      ],
     },
     {
       title: "Cloud & MLOps",
@@ -136,11 +155,11 @@ export const profile: Profile = {
   // TODO: most recent first.
   experience: [
     {
-      role: "GenAI Engineer",
-      company: "Nimbus AI Labs",
+      role: "GenAI Developer",
+      company: "Wipro Limited",
       companyUrl: "https://example.com",
       location: "Bengaluru",
-      start: "Jan 2024",
+      start: "Mar 2025",
       end: "Present",
       current: true,
       highlights: [
@@ -148,56 +167,53 @@ export const profile: Profile = {
         "Built multi-agent workflows with LangGraph and tool calling that automate support triage, saving ~1,200 analyst hours a month.",
         "Introduced an LLM evaluation and guardrails pipeline that cut hallucination-related escalations by 60%.",
       ],
-      stack: ["Python", "LangGraph", "OpenAI GPT", "Claude", "Qdrant", "FastAPI", "AWS"],
-    },
-    {
-      role: "Machine Learning Engineer",
-      company: "Quantiva Analytics",
-      location: "Pune",
-      start: "Jul 2022",
-      end: "Dec 2023",
-      highlights: [
-        "Fine-tuned transformer models for document classification and NER, reaching 94% F1 on production data.",
-        "Shipped a semantic search service with sentence embeddings that replaced keyword search for 30K users.",
-        "Automated training and deployment with MLflow, Docker and GitHub Actions — release time went from days to hours.",
+      stack: [
+        "Python",
+        "Langchain",
+        "LangGraph",
+        "OpenAI GPT",
+        "Claude",
+        "Qdrant",
+        "FastAPI",
       ],
-      stack: ["PyTorch", "Hugging Face", "scikit-learn", "MLflow", "Docker", "Azure"],
-    },
-    {
-      role: "Software Engineer — Data",
-      company: "Brightline Systems",
-      location: "Hyderabad",
-      start: "Jun 2021",
-      end: "Jun 2022",
-      highlights: [
-        "Built Python data pipelines and REST APIs processing 5M+ records a day.",
-        "Developed analytics dashboards and forecasting models that informed quarterly planning.",
-      ],
-      stack: ["Python", "SQL", "Airflow", "PostgreSQL", "React"],
     },
   ],
 
   // TODO: 3–4 projects. `pipeline` drives the mini architecture diagram.
   projects: [
     {
-      title: "DocuMind",
-      tagline: "Enterprise RAG assistant — chat with 2M+ internal documents, with citations.",
-      problem: "Teams lost hours digging through policies, contracts and wikis scattered across tools.",
+      title: "DevDocs",
+      tagline:
+        "Developer RAG assistant — chat with internal documents, with citations.",
+      problem:
+        "Teams lost hours digging through policies, contracts and wikis scattered across tools.",
       approach:
         "Hybrid retrieval (BM25 + dense vectors) with cross-encoder re-ranking, citation-grounded answers and a RAG eval suite running in CI.",
       outcome: "Became the default knowledge tool for 3,000+ employees.",
       metric: { value: "92%", label: "answer accuracy" },
-      pipeline: ["Docs", "Chunk + Embed", "Qdrant", "Re-rank", "LLM", "Cited answer"],
+      pipeline: [
+        "Docs",
+        "Chunk + Embed",
+        "Qdrant",
+        "Re-rank",
+        "LLM",
+        "Cited answer",
+      ],
       stack: ["LangChain", "Qdrant", "OpenAI GPT", "FastAPI", "React"],
-      links: { github: "https://github.com/your-handle/documind", demo: "https://example.com" },
+      links: {
+        github: "https://github.com/your-handle/documind",
+        demo: "https://example.com",
+      },
     },
     {
       title: "AgentOps",
       tagline: "Multi-agent support triage with human-in-the-loop approvals.",
-      problem: "Support queues were overwhelmed by repetitive tickets that needed lookups across four systems.",
+      problem:
+        "Support queues were overwhelmed by repetitive tickets that needed lookups across four systems.",
       approach:
         "A LangGraph supervisor agent routes tickets to specialist agents with tool calling, approval checkpoints and full tracing.",
-      outcome: "Resolves 45% of tickets end-to-end and drafts replies for the rest.",
+      outcome:
+        "Resolves 45% of tickets end-to-end and drafts replies for the rest.",
       metric: { value: "1.2K hrs", label: "saved per month" },
       pipeline: ["Ticket", "Router agent", "Tools / APIs", "Reviewer", "Reply"],
       stack: ["LangGraph", "Claude", "Python", "Redis", "Docker"],
@@ -206,10 +222,12 @@ export const profile: Profile = {
     {
       title: "LoRA-Lite",
       tagline: "Domain-specific LLM fine-tuning on a single GPU.",
-      problem: "A general-purpose model kept missing industry terminology and required output formats.",
+      problem:
+        "A general-purpose model kept missing industry terminology and required output formats.",
       approach:
         "QLoRA fine-tuning of an open-weights 8B model on 40K curated examples, gated by automated evals against a frozen benchmark.",
-      outcome: "Matched a frontier model on the target task at a fraction of the cost.",
+      outcome:
+        "Matched a frontier model on the target task at a fraction of the cost.",
       metric: { value: "−70%", label: "inference cost" },
       pipeline: ["Raw data", "Curate", "QLoRA", "Eval", "Serve"],
       stack: ["PyTorch", "Hugging Face", "MLflow", "Docker"],
@@ -218,12 +236,20 @@ export const profile: Profile = {
     {
       title: "VisionQA",
       tagline: "Multimodal insights from photos and scanned PDFs.",
-      problem: "Field teams captured thousands of photos and PDFs that nobody had time to review.",
+      problem:
+        "Field teams captured thousands of photos and PDFs that nobody had time to review.",
       approach:
         "A vision-LLM pipeline extracts structured data from images and scans, validated against JSON schemas before storage.",
-      outcome: "Turns unstructured uploads into searchable, structured reports in seconds.",
+      outcome:
+        "Turns unstructured uploads into searchable, structured reports in seconds.",
       metric: { value: "10×", label: "faster reporting" },
-      pipeline: ["Images + PDFs", "Vision LLM", "Schema check", "Store", "Dashboard"],
+      pipeline: [
+        "Images + PDFs",
+        "Vision LLM",
+        "Schema check",
+        "Store",
+        "Dashboard",
+      ],
       stack: ["Gemini", "Python", "PostgreSQL", "Streamlit"],
       links: { demo: "https://example.com" },
     },
@@ -231,11 +257,25 @@ export const profile: Profile = {
 
   // TODO: leave as [] to hide the section.
   certifications: [
-    { name: "AWS Certified Machine Learning – Specialty", issuer: "Amazon Web Services", year: "2024" },
+    {
+      name: "AWS Certified Machine Learning – Specialty",
+      issuer: "Amazon Web Services",
+      year: "2024",
+    },
     { name: "Azure AI Engineer Associate", issuer: "Microsoft", year: "2023" },
-    { name: "Generative AI with Large Language Models", issuer: "DeepLearning.AI", year: "2023" },
+    {
+      name: "Generative AI with Large Language Models",
+      issuer: "DeepLearning.AI",
+      year: "2023",
+    },
   ],
 
   // TODO: used by the console only. Leave as [] if you prefer not to mention it.
-  education: [{ degree: "B.Tech in Computer Science", school: "Your University", year: "2021" }],
+  education: [
+    {
+      degree: "B.Tech in Computer Science",
+      school: "Your University",
+      year: "2021",
+    },
+  ],
 };
