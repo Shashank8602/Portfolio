@@ -21,7 +21,7 @@ const NAV_LINKS = [
 
 export default function Home() {
   const kb = buildKnowledgeBase(profile);
-  const initials = profile.name
+  const initials = profile.monogram ?? profile.name
     .split(/\s+/)
     .map((w) => w[0])
     .slice(0, 2)

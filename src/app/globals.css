@@ -238,17 +238,35 @@
     }
   }
 
-  .glass {
-    background: color-mix(in oklab, var(--bg) 92%, transparent);
-    backdrop-filter: blur(8px) saturate(140%);
-    -webkit-backdrop-filter: blur(8px) saturate(140%);
+  /* Navbar: no box and no border. Behind the links it is (almost) the page colour, and below
+     them a fade with a progressive blur dissolves into the content, so the bar merges with
+     the page instead of sitting on top of it. */
+  .nav-fade {
+    position: relative;
+    isolation: isolate;
   }
 
-  @media (min-width: 768px) {
-    .glass {
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-    }
+  .nav-fade::before,
+  .nav-fade::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 -40px 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .nav-fade::before {
+    backdrop-filter: blur(12px);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
+
+  .nav-fade::after {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--bg) 94%, transparent) 0%,
+      color-mix(in oklab, var(--bg) 94%, transparent) 60%,
+      transparent 100%
+    );
   }
 
   .no-scrollbar {

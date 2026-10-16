@@ -11,6 +11,7 @@ import type { Profile } from "./types";
 export const profile: Profile = {
   name: "Shashank S",
   firstName: "Shashank",
+  monogram: "08", // home button in the navbar (leave out to use your initials)
   role: "GenAI Engineer",
   company: "Wipro Limited",
   companyUrl: "https://www.wipro.com",

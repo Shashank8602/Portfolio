@@ -5,7 +5,7 @@ A futuristic, single-page portfolio built with Next.js and Tailwind CSS. It has 
 - **A live neural-network hero:** a hand-written Canvas 2D animation. Signal pulses travel between neurons and the network reacts to the cursor.
 - **An "Ask my AI" console:** an LLM-style chat that answers questions about you. It runs entirely in the visitor's browser, with no backend and no API key.
 
-It also includes three colour themes (Nebula, Matrix, Sunset), each with a light and dark mode, plus a responsive layout from 360 px phones up to wide desktops.
+It also includes the Nebula colour theme in light and dark mode (the Matrix and Sunset themes are still in the code; see `ENABLED_THEMES` in `src/lib/theme.ts`), plus a responsive layout from 360 px phones up to wide desktops.
 
 ---
 
@@ -48,7 +48,9 @@ Almost everything lives in **one file: [`src/content/profile.ts`](src/content/pr
 
 ## 3. Choose a theme
 
-Use the 🎨 button in the navbar, or type `/theme nebula`, `/theme matrix`, `/theme sunset`, `/theme light` or `/theme dark` in the console. The site remembers each visitor's choice.
+The site uses the **Nebula** theme. Visitors can switch between light and dark mode with the sun/moon button (or `/theme light` / `/theme dark` in the console), and the site remembers their choice.
+
+The **Matrix** and **Sunset** themes are still fully defined in the code but switched off. To bring them back, add them to `ENABLED_THEMES` in [`src/lib/theme.ts`](src/lib/theme.ts), for example `["nebula", "matrix", "sunset"]`. The 🎨 colour picker then reappears in the navbar and `/theme matrix` works in the console.
 
 To change the theme **first-time visitors** see, edit `DEFAULT_THEME` / `DEFAULT_MODE` in [`src/lib/theme.ts`](src/lib/theme.ts). The colours themselves are CSS variables at the top of [`src/app/globals.css`](src/app/globals.css).
 

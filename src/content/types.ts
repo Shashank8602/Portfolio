@@ -67,6 +67,8 @@ export type Education = {
 export type Profile = {
   name: string;
   firstName: string;
+  /** Short text on the home button in the navbar. Defaults to your initials. */
+  monogram?: string;
   role: string;
   company: string;
   companyUrl?: string;

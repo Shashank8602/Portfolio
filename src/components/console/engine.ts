@@ -1,5 +1,5 @@
 import type { ConsoleAction, Intent, KnowledgeBase } from "@/content/types";
-import { THEMES, type Mode, type ThemeName } from "@/lib/theme";
+import { ENABLED_THEMES, type Mode, type ThemeName } from "@/lib/theme";
 
 /**
  * A tiny, dependency-free intent matcher. It normalises the question, maps
@@ -212,7 +212,7 @@ const HELP = `Available commands:
 /projects     featured projects
 /contact      ways to get in touch
 /resume       download the résumé
-/theme <name> nebula · matrix · sunset · light · dark
+/theme <name> ${[...ENABLED_THEMES, "light", "dark"].join(" · ")}
 /clear        reset the conversation
 
 Or just ask a question in plain English.`;
@@ -234,13 +234,13 @@ function command(input: string, kb: KnowledgeBase): Reply {
     case "clear":
       return { text: "", effect: { type: "clear" } };
     case "theme": {
-      if ((THEMES as readonly string[]).includes(arg)) {
+      if ((ENABLED_THEMES as readonly string[]).includes(arg)) {
         return { text: `Theme switched to ${arg}. ✨`, effect: { type: "theme", theme: arg as ThemeName } };
       }
       if (arg === "light" || arg === "dark") {
         return { text: `Switched to ${arg} mode.`, effect: { type: "theme", mode: arg } };
       }
-      return { text: `Usage: /theme <${THEMES.join(" | ")} | light | dark>` };
+      return { text: `Usage: /theme <${[...ENABLED_THEMES, "light", "dark"].join(" | ")}>` };
     }
     default:
       return { text: `Unknown command "/${cmd}". Type /help to see what I can do.` };

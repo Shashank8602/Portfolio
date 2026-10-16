@@ -9,13 +9,21 @@ export const THEME_LABELS: Record<ThemeName, { label: string; colors: [string, s
 };
 
 export const DEFAULT_THEME: ThemeName = "nebula";
+
+/**
+ * Themes visitors can use. All three are still fully defined in globals.css; to bring the
+ * others back, add them here (e.g. ["nebula", "matrix", "sunset"]). With more than one
+ * enabled, the colour picker appears in the navbar and `/theme <name>` works in the console.
+ */
+export const ENABLED_THEMES: readonly ThemeName[] = ["nebula"];
+export const THEME_PICKER_ENABLED = ENABLED_THEMES.length > 1;
 export const DEFAULT_MODE: Mode = "dark";
 
 const THEME_KEY = "portfolio-theme";
 const MODE_KEY = "portfolio-mode";
 
 /** Inline <head> script: applies the saved theme before first paint (no flash). */
-export const themeInitScript = `(function(){try{var d=document.documentElement,t=localStorage.getItem("${THEME_KEY}"),m=localStorage.getItem("${MODE_KEY}");if(t&&/^(${THEMES.join(
+export const themeInitScript = `(function(){try{var d=document.documentElement,t=localStorage.getItem("${THEME_KEY}"),m=localStorage.getItem("${MODE_KEY}");if(t&&/^(${ENABLED_THEMES.join(
   "|",
 )})$/.test(t))d.setAttribute("data-theme",t);if(m==="light"||m==="dark")d.setAttribute("data-mode",m)}catch(e){}})()`;
 
@@ -37,7 +45,7 @@ export function restoreTheme() {
     const t = localStorage.getItem(THEME_KEY);
     const m = localStorage.getItem(MODE_KEY);
     const root = document.documentElement;
-    if (t && (THEMES as readonly string[]).includes(t)) root.setAttribute("data-theme", t);
+    if (t && (ENABLED_THEMES as readonly string[]).includes(t)) root.setAttribute("data-theme", t);
     if (m === "light" || m === "dark") root.setAttribute("data-mode", m);
   } catch {
     /* ignore */

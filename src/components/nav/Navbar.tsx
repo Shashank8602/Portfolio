@@ -67,7 +67,7 @@ export function Navbar({ initials, links, resume, github, linkedin }: Props) {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="glass border-b border-border/60">
+      <div className="nav-fade">
         <nav aria-label="Primary" className="container-x flex h-16 items-center justify-between gap-4">
           <a href="#top" className="group flex items-center gap-2.5" aria-label={`${initials}, back to top`}>
             <span className="bg-accent grid size-9 place-items-center rounded-xl font-display text-sm font-bold text-accent-fg">
