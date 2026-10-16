@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# personal guides (kept locally, not published)
+/DEPLOY.md
+/EDITING.md
