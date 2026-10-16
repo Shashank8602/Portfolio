@@ -11,9 +11,15 @@ type Props = {
   className?: string;
 };
 
+// Every section fills at least one screen below the 4rem navbar, so after a menu jump the next
+// section never peeks in at the bottom (lvh = the tallest the viewport gets on phones).
 export function Section({ id, index, eyebrow, title, description, children, className = "" }: Props) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={`relative scroll-mt-16 pt-12 pb-16 sm:pt-14 sm:pb-20 ${className}`}>
+    <section
+      id={id}
+      aria-labelledby={`${id}-title`}
+      className={`relative min-h-[calc(100lvh-4rem)] scroll-mt-16 pt-12 pb-16 sm:pt-14 sm:pb-20 ${className}`}
+    >
       <div className="container-x">
         <Reveal>
           <p className="font-mono text-xs tracking-widest text-accent uppercase">
