@@ -9,7 +9,7 @@ export function Hero({ profile, kb }: { profile: Profile; kb: KnowledgeBase }) {
   const socials = [
     { href: profile.contact.github, label: "GitHub", icon: <GithubIcon className="size-[18px]" /> },
     { href: profile.contact.linkedin, label: "LinkedIn", icon: <LinkedinIcon className="size-[18px]" /> },
-    { href: `mailto:${profile.contact.email}`, label: "Email", icon: <Mail className="size-[18px]" /> },
+    { href: "#contact", label: "Email — see contact options", icon: <Mail className="size-[18px]" /> },
   ];
 
   return (
@@ -23,11 +23,7 @@ export function Hero({ profile, kb }: { profile: Profile; kb: KnowledgeBase }) {
         <div className="bg-grid absolute inset-0 opacity-60" />
         <div
           className="absolute -top-48 left-1/2 h-[560px] w-[900px] max-w-[160vw] -translate-x-1/2"
-          style={{ background: "radial-gradient(closest-side, color-mix(in oklab, var(--accent) 20%, transparent), transparent)" }}
-        />
-        <div
-          className="absolute top-1/3 -right-48 h-[480px] w-[620px]"
-          style={{ background: "radial-gradient(closest-side, color-mix(in oklab, var(--accent-2) 18%, transparent), transparent)" }}
+          style={{ background: "radial-gradient(closest-side, color-mix(in oklab, var(--accent) 12%, transparent), transparent)" }}
         />
         <NeuralCanvas />
       </div>
@@ -56,14 +52,14 @@ export function Hero({ profile, kb }: { profile: Profile; kb: KnowledgeBase }) {
             {profile.name}
           </h1>
           <p className="mt-4 min-h-[1.3em] font-display [overflow-wrap:anywhere] text-[clamp(1.35rem,3.6vw,2.1rem)] font-medium">
-            <DecodeText phrases={profile.rotatingRoles} className="text-gradient" />
+            <DecodeText phrases={profile.rotatingRoles} className="text-accent" />
           </p>
           <p className="animate-fade-up mt-6 max-w-xl text-base text-pretty text-muted [animation-delay:140ms] sm:text-lg">
             {profile.tagline}
           </p>
 
           <div className="animate-fade-up mt-9 flex flex-wrap items-center gap-3 [animation-delay:200ms]">
-            <AskButton className="bg-gradient-accent inline-flex min-h-12 items-center gap-2 rounded-full px-6 font-medium text-accent-fg shadow-[0_8px_30px_-8px_var(--accent)] transition-transform hover:-translate-y-0.5">
+            <AskButton className="bg-accent inline-flex min-h-12 items-center gap-2 rounded-full px-6 font-medium text-accent-fg transition-opacity hover:opacity-90">
               <Sparkles className="size-4" />
               Ask my AI
             </AskButton>

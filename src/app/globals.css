@@ -115,34 +115,37 @@
 
 /* ------------------------------------------------------------------ base */
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
+/* In the base layer so that utility classes (e.g. focus-visible:outline-none) can override these. */
+@layer base {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-}
 
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans);
-  overflow-x: hidden;
-  text-rendering: optimizeLegibility;
-}
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 
-::selection {
-  background: color-mix(in oklab, var(--accent) 35%, transparent);
-  color: var(--fg);
-}
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 6px;
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 35%, transparent);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 }
 
 /* Matrix theme: faint CRT scanlines over the page (dark mode only). */
@@ -175,17 +178,6 @@ body {
       padding-left: max(1.5rem, env(safe-area-inset-left));
       padding-right: max(1.5rem, env(safe-area-inset-right));
     }
-  }
-
-  .text-gradient {
-    background: linear-gradient(100deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .bg-gradient-accent {
-    background: linear-gradient(100deg, var(--accent), var(--accent-2));
   }
 
   /* Subtle blueprint grid, faded at the edges. */
@@ -223,7 +215,6 @@ body {
       background: radial-gradient(
         320px circle at var(--mx, 50%) var(--my, 50%),
         var(--accent),
-        color-mix(in oklab, var(--accent-2) 60%, transparent) 35%,
         transparent 65%
       );
       -webkit-mask:
@@ -236,7 +227,7 @@ body {
     .spotlight::after {
       background: radial-gradient(
         420px circle at var(--mx, 50%) var(--my, 50%),
-        color-mix(in oklab, var(--accent) 9%, transparent),
+        color-mix(in oklab, var(--accent) 6%, transparent),
         transparent 60%
       );
     }
@@ -247,14 +238,8 @@ body {
     }
   }
 
-  /* Below-the-fold sections skip style/layout/paint until they near the viewport. */
-  .lazy-render {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 1000px;
-  }
-
   .glass {
-    background: color-mix(in oklab, var(--bg) 72%, transparent);
+    background: color-mix(in oklab, var(--bg) 92%, transparent);
     backdrop-filter: blur(8px) saturate(140%);
     -webkit-backdrop-filter: blur(8px) saturate(140%);
   }
@@ -356,6 +341,14 @@ body {
 [data-reveal][data-revealed] {
   opacity: 1;
   transform: none;
+}
+
+/* Without JavaScript nothing would ever flip data-revealed, so show everything. */
+@media (scripting: none) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

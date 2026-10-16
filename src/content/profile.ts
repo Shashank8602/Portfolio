@@ -3,279 +3,180 @@ import type { Profile } from "./types";
 /**
  * ─────────────────────────────────────────────────────────────────────────
  *  YOUR PORTFOLIO CONTENT LIVES HERE.
- *  Everything below is realistic PLACEHOLDER data (marked TODO) so the design
- *  can be previewed. Replace it with your own details — every section and the
- *  "Ask my AI" console update automatically.
- *  Optional lists (certifications, education) hide their section when empty.
+ *  Everything below is taken from the résumé "SHASHANK_S_Resume_(October-2026)".
+ *  Only facts stated there are used. Lines marked TODO still need your input.
+ *  Optional lists (certifications, exploring) hide their section when empty.
  * ─────────────────────────────────────────────────────────────────────────
  */
 export const profile: Profile = {
-  name: "Shashank S", // TODO
-  firstName: "Shashank", // TODO
-  role: "GenAI Engineer", // TODO
-  company: "Wipro Limited", // TODO
-  companyUrl: "https://example.com", // TODO (optional)
-  location: "Bengaluru, India", // TODO
-  yearsOfExperience: 2, // TODO
-  openToWork: false, // shows the "Open to opportunities" badge
-  availability: "Open to new opportunities — remote, hybrid or on-site.", // TODO
+  name: "Shashank S",
+  firstName: "Shashank",
+  role: "GenAI Engineer",
+  company: "Wipro Limited",
+  companyUrl: "https://www.wipro.com",
+  location: "Bengaluru, India",
+  yearsOfExperience: "nearly 2", // résumé: "nearly 2 years of experience"
+  openToWork: false, // set to true to show the "Open to opportunities" badge
+  availability: "", // optional sentence, e.g. "Open to remote or hybrid roles."
 
   tagline:
-    "I design and ship production LLM systems — retrieval pipelines, AI agents and evaluation harnesses — that turn foundation models into products people can trust.", // TODO
+    "I build LLM-powered applications in Python — RAG systems with hybrid retrieval, AI agents and LLM evaluation — integrating LLMs through FastAPI.",
 
   // Cycled by the "decoding" animation in the hero.
   rotatingRoles: [
-    "AI Engineer",
     "GenAI Engineer",
     "LLM Application Developer",
     "RAG Systems Builder",
     "Agentic AI Engineer",
   ],
 
-  // TODO: 2–3 short paragraphs.
   summary: [
-    "I'm a GenAI engineer who loves the messy middle between a promising prototype and a reliable product. At Nimbus AI Labs I lead the design of retrieval-augmented and agentic systems that enterprise teams rely on every day.",
-    "My toolkit spans LLM orchestration, vector search, fine-tuning and MLOps — but my favourite part is building the evals and guardrails that make AI dependable in the real world.",
+    "I'm a GenAI Engineer at Wipro in Bengaluru with nearly two years of experience developing LLM-powered applications using Python and modern AI frameworks. My work centres on RAG systems, hybrid information retrieval, AI agents and LLM evaluation, with LLMs integrated through FastAPI.",
+    "I co-developed AgentFabric, an agentic AI platform, and built DevDocs, a RAG-based assistant for codebases. At Wipro I developed an end-to-end RAG platform for a banking client and co-developed WEGA-Studio, an internal application that runs agentic workflows.",
   ],
 
   siteUrl: "https://your-portfolio.vercel.app", // TODO: your final URL (used for SEO)
-  resume: "/resume.pdf", // TODO: replace public/resume.pdf with your CV
+  resume: "/SHASHANK_S_Resume_(October-2026).pdf",
 
   contact: {
-    email: "shashu.s08@gmail.com", // TODO
-    phone: "+91 9483071522", // TODO (never rendered as plain text in HTML)
-    linkedin: "https://www.linkedin.com/in/shashank8602", // TODO
-    github: "https://github.com/Shashank8602", // TODO
+    email: "shashu.s08@gmail.com",
+    phone: "+91 94830 71522", // never rendered as plain text in the HTML
+    linkedin: "https://www.linkedin.com/in/shashank8602",
+    github: "https://github.com/Shashank8602",
   },
 
-  // TODO: 4 headline numbers.
+  // Every figure below comes from the DevDocs project or the summary line of the résumé.
   metrics: [
-    { value: 1.5, suffix: "+", label: "Years exploring GenAI" },
-    // { value: 12, label: "LLM apps in production" },
-    // { value: 50, suffix: "K+", label: "Monthly AI-assisted users" },
-    // { value: 38, suffix: "%", label: "Avg. inference cost cut" },
+    { value: 1.5, suffix: "+", label: "Years building LLM-powered apps" },
+    { value: 2, prefix: "~", suffix: "s", label: "DevDocs burst-question latency, down from 40+ s" },
+    { value: 0.87, label: "DevDocs Recall@5 on tuning data, up from 0.83" },
+    { value: 428, label: "Questions in the DevDocs evaluation benchmark" },
   ],
 
+  // Your own list: keep only topics you are genuinely exploring right now.
   exploring: [
     "LangGraph",
     "RAG",
     "Agentic workflows",
     "Model Context Protocol",
     "LLM evals & observability",
-    // "Small language models",
-    // "Multimodal RAG",
     "Structured outputs",
   ],
 
-  // TODO: your skills. Brand logos appear automatically for known tools
-  // (see src/lib/tech-icons.ts); unknown ones render as clean text chips.
+  // Brand logos appear automatically for known tools (see src/lib/tech-icons.ts);
+  // unknown ones render as clean text chips.
   skills: [
     {
       title: "GenAI & LLMs",
       icon: "sparkles",
       featured: true,
-      blurb: "Designing, prompting, adapting and evaluating foundation models.",
+      blurb: "Building retrieval, agent and evaluation layers around LLMs.",
       items: [
-        "Langchain",
-        "Vector DB",
-        "Prompt engineering",
         "OpenAI GPT",
         "Claude",
-        "Gemini",
-        "Fine-tuning (LoRA / QLoRA)",
         "RAG",
+        "Hybrid retrieval",
+        "Chunking strategies",
+        "Embeddings",
+        "Tool & function calling",
         "AI agents",
-        "Tools",
-        "Function calling",
+        "Agentic workflows",
+        "Multi-agent orchestration",
+        "LLM evaluation",
       ],
     },
     {
-      title: "Languages",
+      title: "Languages & Frameworks",
       icon: "code",
-      blurb: "Production code, data wrangling and glue.",
-      items: ["Python", "SQL"],
+      blurb: "Application code and LLM orchestration.",
+      items: ["Python", "LangChain", "LangGraph", "FastAPI"],
     },
     {
-      title: "Frameworks",
-      icon: "workflow",
-      blurb: "Orchestration and serving.",
-      items: ["LangChain", "LangGraph", "Hugging Face", "FastAPI", "Streamlit"],
-    },
-    {
-      title: "ML & Deep Learning",
-      icon: "brain",
-      blurb: "Training and adapting models.",
-      items: [
-        "Pandas",
-        "NumPy",
-        "Matplotlib",
-        "Supervised Learning",
-        "Model Training",
-        "Transformers",
-      ],
-    },
-    {
-      title: "Data & Vector DBs",
+      title: "Databases & Vector Search",
       icon: "database",
-      blurb: "Retrieval and storage at scale.",
-      items: [
-        "Qdrant",
-        "Pinecone",
-        "ChromaDB",
-        "pgvector",
-        "PostgreSQL",
-        "Redis",
-        "Elasticsearch",
-      ],
+      blurb: "Relational stores and vector retrieval.",
+      items: ["MySQL", "PostgreSQL", "Qdrant", "pgvector", "Elasticsearch"],
     },
     {
-      title: "Cloud & MLOps",
+      title: "Cloud & Tools",
       icon: "cloud",
-      featured: true,
-      blurb: "Taking models from notebook to reliable, observable production.",
-      items: [
-        "AWS",
-        "Azure OpenAI",
-        "Google Cloud",
-        "Docker",
-        "Kubernetes",
-        "MLflow",
-        "GitHub Actions",
-        "Terraform",
-      ],
+      blurb: "Deployment and version control.",
+      items: ["Azure", "Docker", "Git", "GitHub"],
     },
     {
-      title: "Quality & Safety",
-      icon: "shield",
-      blurb: "Making AI dependable.",
-      items: ["LLM evals", "RAGAS", "LangSmith", "Guardrails", "Red-teaming"],
+      title: "AI-Assisted Development",
+      icon: "workflow",
+      blurb: "AI coding tools in the daily workflow.",
+      items: ["GitHub Copilot", "Claude Code", "Codex"],
     },
   ],
 
-  // TODO: most recent first.
+  // Most recent first.
   experience: [
     {
-      role: "GenAI Developer",
+      role: "GenAI Engineer",
       company: "Wipro Limited",
-      companyUrl: "https://example.com",
+      companyUrl: "https://www.wipro.com",
       location: "Bengaluru",
       start: "Mar 2025",
       end: "Present",
       current: true,
       highlights: [
-        "Architected an enterprise RAG platform over 2M+ documents with hybrid search and re-ranking, lifting answer accuracy from 71% to 92%.",
-        "Built multi-agent workflows with LangGraph and tool calling that automate support triage, saving ~1,200 analyst hours a month.",
-        "Introduced an LLM evaluation and guardrails pipeline that cut hallucination-related escalations by 60%.",
+        "Developed an end-to-end RAG platform for a banking client: policy document ingestion, chunking, indexing and embedding, hybrid retrieval, and streamed answers with citations.",
+        "Co-developed WEGA-Studio, an internal application that uses Factory AI's Droid Exec to run agentic workflows — documentation, Jira user stories, code features and test cases — through MCP.",
       ],
-      stack: [
-        "Python",
-        "Langchain",
-        "LangGraph",
-        "OpenAI GPT",
-        "Claude",
-        "Qdrant",
-        "FastAPI",
-      ],
+      stack: ["OpenAI GPT", "Hybrid retrieval", "Reranker", "MCP", "Jira", "Git"],
     },
   ],
 
-  // TODO: 3–4 projects. `pipeline` drives the mini architecture diagram.
   projects: [
     {
       title: "DevDocs",
-      tagline:
-        "Developer RAG assistant — chat with internal documents, with citations.",
-      problem:
-        "Teams lost hours digging through policies, contracts and wikis scattered across tools.",
-      approach:
-        "Hybrid retrieval (BM25 + dense vectors) with cross-encoder re-ranking, citation-grounded answers and a RAG eval suite running in CI.",
-      outcome: "Became the default knowledge tool for 3,000+ employees.",
-      metric: { value: "92%", label: "answer accuracy" },
-      pipeline: [
-        "Docs",
-        "Chunk + Embed",
-        "Qdrant",
-        "Re-rank",
-        "LLM",
-        "Cited answer",
+      tagline: "RAG assistant for codebases, built with grounded, citable answers.",
+      highlights: [
+        "Hybrid retrieval pipeline combining Elasticsearch BM25 and vector search with Reciprocal Rank Fusion, plus similarity-based gating that rejects off-topic queries before the LLM is called.",
+        "Incremental ingestion with SHA-256 change detection, structure-aware chunking (Python AST, Markdown, PDF) and selective re-embedding, with PostgreSQL as the source of truth.",
+        "Project isolation and file-and-line citations generated in application code, so answers stay grounded and verifiable.",
+        "Streaming chat, conversation memory, Stop/Retry controls and fallback-model routing, which cut burst-question latency from 40+ seconds to about 2 seconds.",
+        "Evaluated on a 428-question benchmark over a 104-file project: Recall@5 rose from 0.83 to 0.87 and MRR from 0.78 to 0.83 on tuning data, with further gains on held-out evaluation.",
       ],
-      stack: ["LangChain", "Qdrant", "OpenAI GPT", "FastAPI", "React"],
-      links: {
-        github: "https://github.com/your-handle/documind",
-        demo: "https://example.com",
-      },
+      metric: { value: "~2 s", label: "burst-question latency (from 40+ s)" },
+      pipeline: ["Ingest", "Chunk + embed", "BM25 + vector", "RRF", "Similarity gate", "LLM", "Cited answer"],
+      stack: ["Python", "FastAPI", "React", "PostgreSQL", "Elasticsearch", "Docker"],
+      // TODO: add links: { github: "https://github.com/Shashank8602/<repo>" } if the repository is public.
     },
     {
-      title: "AgentOps",
-      tagline: "Multi-agent support triage with human-in-the-loop approvals.",
-      problem:
-        "Support queues were overwhelmed by repetitive tickets that needed lookups across four systems.",
-      approach:
-        "A LangGraph supervisor agent routes tickets to specialist agents with tool calling, approval checkpoints and full tracing.",
-      outcome:
-        "Resolves 45% of tickets end-to-end and drafts replies for the rest.",
-      metric: { value: "1.2K hrs", label: "saved per month" },
-      pipeline: ["Ticket", "Router agent", "Tools / APIs", "Reviewer", "Reply"],
-      stack: ["LangGraph", "Claude", "Python", "Redis", "Docker"],
-      links: { github: "https://github.com/your-handle/agentops" },
-    },
-    {
-      title: "LoRA-Lite",
-      tagline: "Domain-specific LLM fine-tuning on a single GPU.",
-      problem:
-        "A general-purpose model kept missing industry terminology and required output formats.",
-      approach:
-        "QLoRA fine-tuning of an open-weights 8B model on 40K curated examples, gated by automated evals against a frozen benchmark.",
-      outcome:
-        "Matched a frontier model on the target task at a fraction of the cost.",
-      metric: { value: "−70%", label: "inference cost" },
-      pipeline: ["Raw data", "Curate", "QLoRA", "Eval", "Serve"],
-      stack: ["PyTorch", "Hugging Face", "MLflow", "Docker"],
-      links: { github: "https://github.com/your-handle/lora-lite" },
-    },
-    {
-      title: "VisionQA",
-      tagline: "Multimodal insights from photos and scanned PDFs.",
-      problem:
-        "Field teams captured thousands of photos and PDFs that nobody had time to review.",
-      approach:
-        "A vision-LLM pipeline extracts structured data from images and scans, validated against JSON schemas before storage.",
-      outcome:
-        "Turns unstructured uploads into searchable, structured reports in seconds.",
-      metric: { value: "10×", label: "faster reporting" },
-      pipeline: [
-        "Images + PDFs",
-        "Vision LLM",
-        "Schema check",
-        "Store",
-        "Dashboard",
+      title: "RAG Platform for a Banking Client",
+      tagline: "End-to-end RAG over policy documents, built at Wipro.",
+      highlights: [
+        "Covers policy document ingestion, chunking, indexing and embedding.",
+        "Hybrid retrieval combining BM25 and vector search (cosine similarity), merged with Reciprocal Rank Fusion and refined with a reranker.",
+        "Streams LLM answers (OpenAI GPT model) with citations to the source files used.",
       ],
-      stack: ["Gemini", "Python", "PostgreSQL", "Streamlit"],
-      links: { demo: "https://example.com" },
+      pipeline: ["Policy docs", "Chunk + index", "BM25 + vector", "RRF + rerank", "GPT (streamed)", "Cited answer"],
+      stack: ["OpenAI GPT", "Hybrid retrieval", "Reranker"],
+    },
+    {
+      title: "WEGA-Studio",
+      tagline: "Internal application for agentic workflows, co-developed at Wipro.",
+      highlights: [
+        "Uses Factory AI's Droid Exec to run agentic workflows across multiple use cases.",
+        "Workflows: documentation generation, user story generation with push to Jira via MCP, implementing user stories as code features using Jira and Git MCP, and test case generation for Git repositories via Git MCP.",
+      ],
+      pipeline: ["Use case", "Droid Exec agent", "Jira + Git (MCP)", "Docs · stories · code · tests"],
+      stack: ["Droid Exec", "MCP", "Jira", "Git"],
     },
   ],
 
-  // TODO: leave as [] to hide the section.
-  certifications: [
-    {
-      name: "AWS Certified Machine Learning – Specialty",
-      issuer: "Amazon Web Services",
-      year: "2024",
-    },
-    { name: "Azure AI Engineer Associate", issuer: "Microsoft", year: "2023" },
-    {
-      name: "Generative AI with Large Language Models",
-      issuer: "DeepLearning.AI",
-      year: "2023",
-    },
-  ],
+  // The résumé lists no certifications, so the section is hidden. Add entries to show it.
+  certifications: [],
 
-  // TODO: used by the console only. Leave as [] if you prefer not to mention it.
+  // Appears in console answers only.
   education: [
     {
-      degree: "B.Tech in Computer Science",
-      school: "Your University",
-      year: "2021",
+      degree: "B.E. in Computer Science and Technology (CGPA 8.93)",
+      school: "SJB Institute of Technology",
+      year: "2020 – 2024",
     },
   ],
 };

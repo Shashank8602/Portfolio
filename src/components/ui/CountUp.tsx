@@ -15,7 +15,8 @@ export function CountUp({ value, prefix = "", suffix = "" }: { value: number; pr
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) return; // already visible — leave as is
 
-    const format = (n: number) => `${prefix}${n}${suffix}`;
+    const decimals = (String(value).split(".")[1] ?? "").length;
+    const format = (n: number) => `${prefix}${n.toFixed(decimals)}${suffix}`;
     el.textContent = format(0);
     let raf = 0;
     const observer = new IntersectionObserver(
@@ -27,7 +28,7 @@ export function CountUp({ value, prefix = "", suffix = "" }: { value: number; pr
         const step = (now: number) => {
           const t = Math.min(1, (now - start) / duration);
           const eased = 1 - Math.pow(1 - t, 3);
-          el.textContent = format(Math.round(value * eased));
+          el.textContent = format(value * eased);
           if (t < 1) raf = requestAnimationFrame(step);
         };
         raf = requestAnimationFrame(step);

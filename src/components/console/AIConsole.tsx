@@ -179,7 +179,7 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
     <div
       ref={rootRef}
       id="ask"
-      className="card flex h-[min(64svh,560px)] min-h-[440px] scroll-mt-24 flex-col overflow-hidden bg-surface/80 shadow-[0_0_90px_-30px_var(--accent)] backdrop-blur-sm lg:h-[540px]"
+      className="card flex h-[min(64svh,560px)] min-h-[440px] scroll-mt-24 flex-col overflow-hidden bg-surface/80 shadow-2xl shadow-black/25 backdrop-blur-sm lg:h-[540px]"
     >
       {/* Window chrome */}
       <div className="flex items-center gap-3 border-b border-border px-4 py-3">
@@ -217,7 +217,7 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
             </div>
           ) : (
             <div key={m.id} className="flex gap-3">
-              <span className="bg-gradient-accent mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg text-accent-fg" aria-hidden="true">
+              <span className="bg-accent mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg text-accent-fg" aria-hidden="true">
                 <Sparkles className="size-3.5" />
               </span>
               <div className="min-w-0 flex-1">
@@ -243,7 +243,7 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
         )}
         {status === "thinking" && (
           <div className="flex items-center gap-3">
-            <span className="bg-gradient-accent grid size-6 shrink-0 place-items-center rounded-lg text-accent-fg" aria-hidden="true">
+            <span className="bg-accent grid size-6 shrink-0 place-items-center rounded-lg text-accent-fg" aria-hidden="true">
               <Sparkles className="size-3.5" />
             </span>
             <span className="shimmer-text font-mono text-xs">thinking…</span>
@@ -272,7 +272,7 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
 
       {/* Prompt */}
       <form onSubmit={onSubmit} className="border-t border-border p-3">
-        <div className="flex items-center gap-2 rounded-xl border border-border bg-bg/60 pl-3 focus-within:border-accent/70 focus-within:shadow-[0_0_0_3px_color-mix(in_oklab,var(--accent)_18%,transparent)]">
+        <div className="flex items-center gap-2 rounded-xl border border-border bg-bg/60 pl-3 focus-within:border-accent/70 focus-within:ring-2 focus-within:ring-accent/25">
           <span className="font-mono text-accent" aria-hidden="true">
             ›
           </span>
@@ -295,7 +295,7 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
             type="submit"
             disabled={!input.trim()}
             aria-label="Send"
-            className="bg-gradient-accent m-1 grid size-9 shrink-0 place-items-center rounded-lg text-accent-fg transition-opacity disabled:opacity-35"
+            className="bg-accent m-1 grid size-9 shrink-0 place-items-center rounded-lg text-accent-fg transition-opacity disabled:opacity-35"
           >
             <CornerDownLeft className="size-4" />
           </button>

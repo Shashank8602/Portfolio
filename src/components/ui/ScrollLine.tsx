@@ -38,7 +38,7 @@ export function ScrollLine({ className = "" }: { className?: string }) {
       <div className="absolute inset-0 bg-border" />
       <div
         ref={fillRef}
-        className="absolute inset-0 origin-top scale-y-0 bg-gradient-to-b from-accent via-accent-2 to-accent shadow-[0_0_12px_var(--accent)] transition-transform duration-150 ease-out motion-reduce:transition-none"
+        className="absolute inset-0 origin-top scale-y-0 bg-accent transition-transform duration-150 ease-out motion-reduce:transition-none"
       />
     </div>
   );

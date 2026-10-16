@@ -135,5 +135,4 @@ Accessibility and performance features:
 - screen-reader friendly console output;
 - all animations respect the visitor's **reduced motion** setting;
 - the canvas pauses when off-screen or in a background tab;
-- below-the-fold sections render lazily;
 - no animation library is used; motion is CSS and small hand-written effects.

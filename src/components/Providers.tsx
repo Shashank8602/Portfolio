@@ -22,22 +22,5 @@ export function Providers({ children }: { children: ReactNode }) {
     return () => document.removeEventListener("pointermove", onMove);
   }, []);
 
-  // Scroll-reveal for every <Reveal> on the page, via a single observer.
-  useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-revealed])");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          e.target.setAttribute("data-revealed", "");
-          observer.unobserve(e.target);
-        }
-      },
-      { rootMargin: "0px 0px -10% 0px" },
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return children;
 }

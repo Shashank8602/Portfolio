@@ -13,7 +13,7 @@ export function PipelineDiagram({ steps }: { steps: string[] }) {
               <span
                 className={`rounded-lg border px-2 py-1.5 font-mono text-[11px] whitespace-nowrap ${
                   last
-                    ? "border-accent/60 bg-accent/10 text-fg shadow-[0_0_14px_-4px_var(--accent)]"
+                    ? "border-accent/60 bg-accent/10 text-fg"
                     : i === 0
                       ? "border-border bg-surface text-fg"
                       : "border-border bg-surface text-muted"
@@ -24,7 +24,7 @@ export function PipelineDiagram({ steps }: { steps: string[] }) {
               {!last && (
                 <span aria-hidden="true" className="relative mx-1 h-px w-6 overflow-hidden bg-border">
                   <span
-                    className="flow-dot absolute -top-[2px] left-0 size-[5px] rounded-full bg-accent shadow-[0_0_6px_var(--accent)]"
+                    className="flow-dot absolute -top-[2px] left-0 size-[5px] rounded-full bg-accent"
                     style={{ animationDelay: `${i * 0.25}s` }}
                   />
                 </span>

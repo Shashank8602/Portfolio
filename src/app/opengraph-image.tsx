@@ -22,7 +22,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "radial-gradient(circle at 15% 10%, #12204a 0%, #05060f 55%), #05060f",
+          background: "#05060f",
           color: "#e6e9f5",
           position: "relative",
         }}
@@ -49,9 +49,7 @@ export default function OpengraphImage() {
             display: "flex",
             fontSize: 46,
             marginTop: 8,
-            backgroundImage: "linear-gradient(90deg, #22d3ee, #8b5cf6)",
-            backgroundClip: "text",
-            color: "transparent",
+            color: "#22d3ee",
           }}
         >
           {profile.role}

@@ -70,7 +70,7 @@ export function Navbar({ initials, links, resume, github, linkedin }: Props) {
       <div className="glass border-b border-border/60">
         <nav aria-label="Primary" className="container-x flex h-16 items-center justify-between gap-4">
           <a href="#top" className="group flex items-center gap-2.5" aria-label={`${initials}, back to top`}>
-            <span className="bg-gradient-accent grid size-9 place-items-center rounded-xl font-display text-sm font-bold text-accent-fg shadow-[0_0_24px_-4px_var(--accent)]">
+            <span className="bg-accent grid size-9 place-items-center rounded-xl font-display text-sm font-bold text-accent-fg">
               {initials}
             </span>
           </a>
@@ -112,7 +112,7 @@ export function Navbar({ initials, links, resume, github, linkedin }: Props) {
             </button>
           </div>
         </nav>
-        <div ref={progressRef} aria-hidden="true" className="bg-gradient-accent h-px origin-left scale-x-0" />
+        <div ref={progressRef} aria-hidden="true" className="bg-accent h-px origin-left scale-x-0" />
       </div>
 
       {open && (
@@ -152,7 +152,7 @@ export function Navbar({ initials, links, resume, github, linkedin }: Props) {
               <a
                 href={resume}
                 download
-                className="bg-gradient-accent inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3.5 font-medium text-accent-fg"
+                className="bg-accent inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3.5 font-medium text-accent-fg"
               >
                 <Download className="size-4" />
                 Download résumé

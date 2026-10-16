@@ -50,7 +50,7 @@ export function ThemeSwitcher() {
                 >
                   <span
                     className="size-5 shrink-0 rounded-full ring-1 ring-border"
-                    style={{ background: `linear-gradient(135deg, ${THEME_LABELS[t].colors[0]}, ${THEME_LABELS[t].colors[1]})` }}
+                    style={{ background: THEME_LABELS[t].colors[0] }}
                   />
                   <span className="flex-1">{THEME_LABELS[t].label}</span>
                   {theme === t && <Check className="size-4 text-accent" />}

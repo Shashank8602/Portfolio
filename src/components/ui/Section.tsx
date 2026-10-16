@@ -13,7 +13,7 @@ type Props = {
 
 export function Section({ id, index, eyebrow, title, description, children, className = "" }: Props) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={`lazy-render relative scroll-mt-20 py-20 sm:py-28 ${className}`}>
+    <section id={id} aria-labelledby={`${id}-title`} className={`relative scroll-mt-16 pt-12 pb-16 sm:pt-14 sm:pb-20 ${className}`}>
       <div className="container-x">
         <Reveal>
           <p className="font-mono text-xs tracking-widest text-accent uppercase">
@@ -28,7 +28,7 @@ export function Section({ id, index, eyebrow, title, description, children, clas
           </h2>
           {description && <p className="mt-4 max-w-2xl text-base text-muted sm:text-lg">{description}</p>}
         </Reveal>
-        <div className="mt-10 sm:mt-14">{children}</div>
+        <div className="mt-8 sm:mt-10">{children}</div>
       </div>
     </section>
   );

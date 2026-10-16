@@ -25,10 +25,10 @@ export function Skills({ skills, index }: { skills: SkillCategory[]; index: stri
       eyebrow="skills"
       title={
         <>
-          A toolkit built for the <span className="text-gradient">GenAI stack</span>.
+          A toolkit built for the <span className="text-accent">GenAI stack</span>.
         </>
       }
-      description="From prompt to production: the models, frameworks and infrastructure I use to ship AI that works."
+      description="The models, frameworks, databases and tools I work with."
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
         {skills.map((s, i) => {

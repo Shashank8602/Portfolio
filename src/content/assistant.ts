@@ -1,3 +1,4 @@
+import { gmailComposeUrl } from "@/lib/email";
 import type { Intent, KnowledgeBase, Profile } from "./types";
 
 /**
@@ -35,7 +36,7 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     id: "about",
     keywords: ["self", "background", "summary", "overview", "profile", "name"],
     examples: ["tell me about yourself", "who are you", `who is ${first}`, "introduce yourself", "give me a quick summary"],
-    answer: `${p.name} is a ${p.role} at ${p.company}, based in ${p.location}, with ${p.yearsOfExperience}+ years of experience building ML and GenAI systems.\n\n${p.summary[0]}`,
+    answer: `${p.name} is a ${p.role} at ${p.company}, based in ${p.location}, with ${p.yearsOfExperience} years of experience building LLM-powered applications.\n\n${p.summary[0]}`,
     chips: ["What's your tech stack?", "Current role?", "Best project?"],
     actions: [{ type: "scroll", target: "about", label: "Read more" }],
   });
@@ -55,7 +56,7 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     id: "experience",
     keywords: ["experience", "career", "history", "year", "previous", "past", "worked", "journey", "senior"],
     examples: ["how many years of experience", "work history", "previous companies", "tell me about your career", "where have you worked"],
-    answer: `${p.yearsOfExperience}+ years across ${p.experience.length} roles:\n\n${p.experience
+    answer: `${p.yearsOfExperience.charAt(0).toUpperCase()}${p.yearsOfExperience.slice(1)} years of experience:\n\n${p.experience
       .map((e) => `• ${e.role} — ${e.company} (${e.start} – ${e.end})`)
       .join("\n")}\n\nAsk about any company by name for details.`,
     chips: p.experience.slice(0, 2).map((e) => `What did you do at ${e.company}?`),
@@ -116,9 +117,21 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
   });
 
   const projectAnswer = (pr: Profile["projects"][number]) =>
-    `${pr.title} — ${pr.tagline}\n\nProblem: ${pr.problem}\nApproach: ${pr.approach}\nOutcome: ${pr.outcome}${
-      pr.metric ? ` (${pr.metric.value} ${pr.metric.label})` : ""
-    }\n\nStack: ${pr.stack.join(" · ")}`;
+    [
+      `${pr.title} — ${pr.tagline}`,
+      [
+        pr.problem && `Problem: ${pr.problem}`,
+        pr.approach && `Approach: ${pr.approach}`,
+        pr.outcome && `Outcome: ${pr.outcome}`,
+        pr.highlights?.length && bullets(pr.highlights),
+        pr.metric && `Result: ${pr.metric.value} ${pr.metric.label}`,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+      `Stack: ${pr.stack.join(" · ")}`,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
   const projectLinks = (pr: Profile["projects"][number]) =>
     [
       pr.links?.github && { type: "link" as const, href: pr.links.github, label: "GitHub" },
@@ -151,28 +164,23 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     id: "rag",
     keywords: ["rag", "retrieval", "vector", "embedding", "semantic", "search", "chunk", "rerank", "knowledge", "grounding"],
     examples: ["do you know rag", "experience with retrieval augmented generation", "how do you build rag systems", "vector databases"],
-    // TODO: describe your own approach to RAG.
-    answer: `RAG is ${first}'s bread and butter: smart chunking, hybrid keyword + vector retrieval, re-ranking, citation-grounded generation — and evals to prove it works.\n\nVector stores used: ${
-      p.skills.find((c) => /data|vector/i.test(c.title))?.items.join(", ") ?? "various"
-    }.`,
+    answer: `RAG is the core of ${first}'s work.\n\n• At Wipro: an end-to-end RAG platform for a banking client — document ingestion, chunking, indexing and embedding; hybrid retrieval (BM25 + vector search) merged with Reciprocal Rank Fusion and refined by a reranker; streamed answers with source citations.\n• DevDocs: a RAG assistant for codebases with structure-aware chunking, similarity-based gating before the LLM, file-and-line citations and a 428-question evaluation benchmark.\n\nVector search: Qdrant, pgvector, Elasticsearch.`,
     chips: p.projects[0] ? [`Tell me about ${p.projects[0].title}`] : undefined,
   });
 
   intents.push({
     id: "agents",
-    keywords: ["agent", "autonomous", "tool", "function", "calling", "mcp", "orchestration", "multi", "workflow", "langgraph"],
+    keywords: ["agent", "autonomous", "tool", "function", "calling", "mcp", "orchestration", "multi", "workflow", "langgraph", "agentfabric", "wega"],
     examples: ["have you built ai agents", "experience with agentic ai", "tool calling", "multi agent systems"],
-    // TODO: describe your own agent work.
-    answer: `${first} builds agentic systems with planner/worker patterns, tool and function calling, human-in-the-loop checkpoints and full tracing — designed so agents stay predictable in production.`,
-    chips: p.projects[1] ? [`Tell me about ${p.projects[1].title}`] : undefined,
+    answer: `${first} has worked on agentic systems in two places:\n\n• AgentFabric — co-developed an agentic AI platform.\n• WEGA-Studio at Wipro — co-developed an internal application that runs agentic workflows through Factory AI's Droid Exec, integrating Jira and Git over MCP (documentation, user stories, code features, test cases).\n\nSkills: tool and function calling, multi-agent orchestration, LangChain and LangGraph.`,
+    chips: ["Tell me about WEGA-Studio"],
   });
 
   intents.push({
     id: "why-hire",
     keywords: ["why", "hire", "strength", "unique", "different", "value", "stand", "choose", "fit", "bring"],
     examples: ["why should we hire you", "what makes you different", "what are your strengths", "why you"],
-    // TODO: make this yours.
-    answer: `Three reasons:\n\n• Ships to production — not just demos. ${first} owns systems end-to-end, from data to deployment.\n• Measures everything — evals, guardrails and cost tracking come built in.\n• Communicates clearly — turns fuzzy AI ideas into scoped, testable plans that stakeholders understand.`,
+    answer: `What ${first} brings:\n\n• Hands-on with the whole RAG pipeline — ingestion, chunking, hybrid retrieval, reranking and cited, streamed answers.\n• Measures results — DevDocs was evaluated on a 428-question benchmark (Recall@5 0.83 → 0.87 and MRR 0.78 → 0.83 on tuning data).\n• Agentic work too — co-developed AgentFabric and WEGA-Studio.\n\nExperience so far: ${p.yearsOfExperience} years.`,
     chips: ["How do I contact you?", "Download résumé"],
   });
 
@@ -196,7 +204,7 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
   if (p.education.length) {
     intents.push({
       id: "education",
-      keywords: ["education", "degree", "study", "studied", "university", "college", "school", "graduate", "graduation", "qualification"],
+      keywords: ["education", "degree", "study", "studied", "university", "college", "school", "graduate", "graduation", "qualification", "cgpa", "gpa", "grade", "marks"],
       examples: ["what is your education", "where did you study", "which degree do you have"],
       answer: `Education:\n\n${p.education.map((e) => `• ${e.degree} — ${e.school} (${e.year})`).join("\n")}`,
     });
@@ -210,7 +218,7 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     examples: ["how do i contact you", "what is your email", "how can i reach you", "let's connect", "get in touch"],
     answer: `Best ways to reach ${first}:\n\n• Email — ${p.contact.email}\n• LinkedIn — ${p.contact.linkedin.replace(/^https?:\/\/(www\.)?/, "")}\n• GitHub — ${p.contact.github.replace(/^https?:\/\/(www\.)?/, "")}\n\nThe phone number is behind a "Show number" button to keep spam bots away.`,
     actions: [
-      { type: "link", href: `mailto:${p.contact.email}`, label: "Send email" },
+      { type: "link", href: gmailComposeUrl(p.contact.email), label: "Write in Gmail" },
       { type: "reveal-phone", label: "Show phone" },
     ],
   });
@@ -251,7 +259,7 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     id: "location",
     keywords: ["where", "location", "based", "live", "city", "country", "remote", "relocate", "relocation", "onsite", "hybrid", "timezone"],
     examples: ["where are you based", "where do you live", "are you open to remote", "can you relocate"],
-    answer: `${first} is based in ${p.location}. ${p.availability}`,
+    answer: [`${first} is based in ${p.location}.`, p.availability].filter(Boolean).join(" "),
   });
 
   intents.push({
@@ -259,8 +267,8 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     keywords: ["available", "availability", "opportunity", "looking", "freelance", "notice", "opening", "open"],
     examples: ["are you available", "are you looking for a job", "open to opportunities", "available for freelance"],
     answer: p.openToWork
-      ? `Yes! ${p.availability}\n\nThe fastest route is email: ${p.contact.email}`
-      : `${first} isn't actively looking right now, but is always happy to talk about interesting AI problems: ${p.contact.email}`,
+      ? `Yes! ${p.availability || "Open to new opportunities."}\n\nThe fastest route is email: ${p.contact.email}`
+      : `For roles, projects or collaborations, the best route is email: ${p.contact.email}`,
     chips: ["Download résumé", "How do I contact you?"],
   });
 

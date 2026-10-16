@@ -34,9 +34,9 @@ Tip: stop the dev server with `Ctrl + C`. If `npm run dev` says the port is busy
 | `company` | Status pill and the About card |
 | `companyUrl` | Optional link (not currently shown in the hero) |
 | `location` | Hero, About card, console answers |
-| `yearsOfExperience` | Console answers ("4+ years…") |
+| `yearsOfExperience` | Text, not a number: `"nearly 2"`, `"3+"`. The console says "<value> years of experience" |
 | `openToWork` | `true` shows the green "Open to opportunities" badge; `false` hides it |
-| `availability` | Sentence the console uses for "are you available?" and "where are you based?" |
+| `availability` | Optional sentence the console adds after your location. Use `""` to say nothing |
 | `tagline` | The paragraph under your name, also the SEO description |
 | `rotatingRoles` | The titles that "decode" and cycle in the hero (2 to 5 is ideal) |
 | `summary` | 2–3 short paragraphs in the About card (each string is one paragraph) |
@@ -117,9 +117,12 @@ projects: [
   {
     title: "DocuMind",
     tagline: "One-line description.",
+    // Use EITHER the story fields…
     problem: "What was broken or missing.",
     approach: "What you built and how.",
     outcome: "What changed as a result.",
+    // …OR a bullet list (every field in this group is optional; only what you fill in is shown)
+    highlights: ["First thing worth knowing.", "Second thing."],
     metric: { value: "92%", label: "answer accuracy" },   // optional highlight number
     pipeline: ["Docs", "Embed", "Vector DB", "LLM", "Answer"],  // draws the mini diagram
     stack: ["LangChain", "Qdrant", "FastAPI"],
@@ -130,6 +133,8 @@ projects: [
 - 3–4 projects is ideal. `pipeline` should be 4–6 short steps describing the data flow.
 - Leave out `links.github` or `links.demo` (or both) if they don't exist. The matching button disappears.
 - Leave out `metric` if you don't have an honest number.
+- Only write what you can back up in an interview. Numbers should come from your résumé or your own measurements.
+- With an odd number of projects (1, 3, 5…), the first card automatically spans the full width.
 
 ### Certifications and education
 ```ts

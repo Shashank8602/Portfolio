@@ -1,13 +1,16 @@
-import { ArrowUpRight, Mail, Phone, Send } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { CopyButton } from "@/components/ui/CopyButton";
+import { EmailMenu } from "@/components/ui/EmailMenu";
 import { PhoneReveal } from "@/components/ui/PhoneReveal";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import type { Profile } from "@/content/types";
 
-const handle = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+// Show just the handle ("in/shashank8602", "Shashank8602"); the card label already names the site.
+const handle = (url: string) =>
+  url.replace(/^https?:\/\/(www\.)?(linkedin\.com\/|github\.com\/)?/, "").replace(/\/$/, "");
 
 function ContactCard({ icon, label, children }: { icon: ReactNode; label: string; children: ReactNode }) {
   return (
@@ -50,10 +53,10 @@ export function Contact({ profile, index }: { profile: Profile; index: string })
       eyebrow="contact"
       title={
         <>
-          Let&apos;s build something <span className="text-gradient">intelligent</span>.
+          Let&apos;s build something <span className="text-accent">intelligent</span>.
         </>
       }
-      description="Hiring for an AI role, scoping a GenAI product, or just want to talk LLMs? My inbox is open — I usually reply within a day."
+      description="Hiring for an AI role, scoping a GenAI product, or just want to talk LLMs? My inbox is open."
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Reveal>
@@ -62,13 +65,7 @@ export function Contact({ profile, index }: { profile: Profile; index: string })
               {email}
             </a>
             <div className="mt-4 flex flex-wrap gap-2">
-              <a
-                href={`mailto:${email}`}
-                className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3.5 text-xs font-medium transition-colors hover:bg-accent/20"
-              >
-                <Send className="size-3.5" />
-                Write
-              </a>
+              <EmailMenu email={email} />
               <CopyButton value={email} />
             </div>
           </ContactCard>

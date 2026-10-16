@@ -39,7 +39,7 @@ export function NeuralCanvas() {
     let linkDist = 140;
     const nodes: Node[] = [];
     let pulses: Pulse[] = [];
-    let colors = { a: readColor("--accent"), b: readColor("--accent-2"), strength: 1 };
+    let colors = { a: readColor("--accent"), b: readColor("--accent"), strength: 1 };
     const mouse = { x: -9999, y: -9999, active: false };
     let raf = 0;
     let running = false;
@@ -49,7 +49,7 @@ export function NeuralCanvas() {
 
     const readTheme = () => {
       const s = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--net-strength"));
-      colors = { a: readColor("--accent"), b: readColor("--accent-2"), strength: Number.isNaN(s) ? 1 : s };
+      colors = { a: readColor("--accent"), b: readColor("--accent"), strength: Number.isNaN(s) ? 1 : s };
     };
 
     const resize = () => {

@@ -12,7 +12,7 @@ export function About({ profile, index }: { profile: Profile; index: string }) {
       eyebrow="about"
       title={
         <>
-          Turning foundation models into <span className="text-gradient">dependable products</span>.
+          Building LLM applications on <span className="text-accent">retrieval and agents</span>.
         </>
       }
     >
@@ -40,7 +40,7 @@ export function About({ profile, index }: { profile: Profile; index: string }) {
         {profile.metrics.map((m, i) => (
           <Reveal key={m.label} delay={0.06 * i} className="col-span-1">
             <div className="spotlight card flex h-full flex-col justify-between gap-3 p-5 sm:p-6">
-              <span className="text-gradient font-display text-[clamp(2rem,5vw,2.75rem)] leading-none font-bold">
+              <span className="text-accent font-display text-[clamp(2rem,5vw,2.75rem)] leading-none font-bold">
                 <CountUp value={m.value} prefix={m.prefix} suffix={m.suffix} />
               </span>
               <span className="text-sm text-muted">{m.label}</span>
@@ -59,7 +59,7 @@ export function About({ profile, index }: { profile: Profile; index: string }) {
                       {profile.exploring.map((topic) => (
                         <li key={topic} className="flex items-center gap-4 pr-4 text-sm whitespace-nowrap text-fg">
                           {topic}
-                          <span className="size-1 rounded-full bg-accent-2" aria-hidden="true" />
+                          <span className="size-1 rounded-full bg-accent/60" aria-hidden="true" />
                         </li>
                       ))}
                     </ul>

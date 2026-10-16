@@ -38,9 +38,12 @@ export type Experience = {
 export type Project = {
   title: string;
   tagline: string;
-  problem: string;
-  approach: string;
-  outcome: string;
+  /** Optional narrative fields: only the ones you fill in are shown. */
+  problem?: string;
+  approach?: string;
+  outcome?: string;
+  /** Optional bullet list, shown when you don't have a problem/approach/outcome story. */
+  highlights?: string[];
   metric?: { value: string; label: string };
   /** Steps rendered as the mini architecture diagram on the card. */
   pipeline: string[];
@@ -68,8 +71,10 @@ export type Profile = {
   company: string;
   companyUrl?: string;
   location: string;
-  yearsOfExperience: number;
+  /** Free text, e.g. "nearly 2" or "3+" — shown as "<value> years" in the console. */
+  yearsOfExperience: string;
   openToWork: boolean;
+  /** Optional sentence about location / availability. Leave "" to say nothing. */
   availability: string;
   tagline: string;
   rotatingRoles: string[];
