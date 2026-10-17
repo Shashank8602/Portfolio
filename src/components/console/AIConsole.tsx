@@ -6,7 +6,7 @@ import type { ConsoleAction, KnowledgeBase } from "@/content/types";
 import { setTheme } from "@/lib/theme";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { FOCUS_CONSOLE_EVENT, REVEAL_PHONE_EVENT } from "@/lib/events";
-import { respond, toTokens } from "./engine";
+import { respond, toTokens, type ReplyTable } from "./engine";
 
 type Stats = { ttft: number; tokens: number; tps: number };
 type Message = {
@@ -16,6 +16,7 @@ type Message = {
   streaming?: boolean;
   chips?: string[];
   actions?: ConsoleAction[];
+  table?: ReplyTable;
   stats?: Stats;
 };
 type Status = "ready" | "thinking" | "streaming";
@@ -94,7 +95,8 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
     setStatus("thinking");
 
     const tokens = toTokens(reply.text);
-    const tokenCount = tokens.filter((t) => t.trim()).length;
+    const tableText = reply.table ? reply.table.rows.flat().join(" ") + " " + (reply.table.footnote ?? "") : "";
+    const tokenCount = tokens.filter((t) => t.trim()).length; // only the streamed text, so tok/s stays honest
     const askedAt = clock();
     let firstTokenAt = 0;
     let shown = 0;
@@ -111,11 +113,12 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
         text: reply.text,
         chips: reply.chips,
         actions: reply.actions,
+        table: reply.table,
         stats: { ttft: Math.round(firstTokenAt - askedAt), tokens: tokenCount, tps: Math.round(tokenCount / seconds) },
       };
       setMessages((m) => (m.some((x) => x.id === botId) ? m.map((x) => (x.id === botId ? final : x)) : [...m, final]));
       setStatus("ready");
-      setAnnouncement(reply.text);
+      setAnnouncement(reply.table ? `${reply.text} ${tableText}` : reply.text);
     };
     finishCurrent.current = complete;
 
@@ -137,6 +140,13 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
       },
       reduced ? 0 : jitter(280, 640),
     );
+  };
+
+  const runCommand = (cmd: string) => {
+    if (cmd.includes("<")) {
+      setInput(cmd.split("<")[0]);
+      inputRef.current?.focus({ preventScroll: true });
+    } else send(cmd);
   };
 
   const onSubmit = (e: FormEvent) => {
@@ -225,6 +235,41 @@ export function AIConsole({ kb }: { kb: KnowledgeBase }) {
                   {m.text}
                   {m.streaming && <span className="caret ml-0.5 inline-block h-4 w-[7px] translate-y-0.5 bg-accent" aria-hidden="true" />}
                 </p>
+                {m.table && !m.streaming && (
+                  <div className="animate-fade-in mt-3 overflow-hidden rounded-xl border border-border">
+                    <table className="w-full border-collapse text-left text-[13px]">
+                      <thead>
+                        <tr className="bg-elevated/60 font-mono text-[10.5px] tracking-widest text-subtle uppercase">
+                          <th scope="col" className="px-3 py-2 font-medium">
+                            {m.table.head[0]}
+                          </th>
+                          <th scope="col" className="px-3 py-2 font-medium">
+                            {m.table.head[1]}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {m.table.rows.map(([cmd, desc]) => (
+                          <tr key={cmd} className="border-t border-border/70">
+                            <td className="px-3 py-2 align-top whitespace-nowrap">
+                              <button
+                                type="button"
+                                onClick={() => runCommand(cmd)}
+                                className="font-mono text-[12.5px] text-accent underline-offset-4 hover:underline"
+                              >
+                                {cmd}
+                              </button>
+                            </td>
+                            <td className="px-3 py-2 align-top text-muted">{desc}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {m.table.footnote && (
+                      <p className="border-t border-border/70 px-3 py-2 text-xs text-subtle">{m.table.footnote}</p>
+                    )}
+                  </div>
+                )}
                 {m.actions && !m.streaming && (
                   <div className="mt-3 flex flex-wrap gap-2">
                     {m.actions.map((a) => (

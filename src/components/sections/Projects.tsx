@@ -7,10 +7,6 @@ import { TechChip } from "@/components/ui/TechChip";
 import type { Project } from "@/content/types";
 
 export function Projects({ projects, index }: { projects: Project[]; index: string }) {
-  // With an odd number of projects, the first becomes a full-width "featured" card (two columns
-  // inside), so the grid below it stays balanced and long bullet lists stay readable.
-  const hasFeatured = projects.length % 2 === 1;
-
   return (
     <Section
       id="projects"
@@ -25,7 +21,7 @@ export function Projects({ projects, index }: { projects: Project[]; index: stri
     >
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {projects.map((p, i) => {
-          const featured = hasFeatured && i === 0;
+          const featured = !!p.featured;
           const story = (
             [
               ["Problem", p.problem],

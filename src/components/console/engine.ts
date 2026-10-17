@@ -12,8 +12,12 @@ export type Effect =
   | { type: "theme"; theme?: ThemeName; mode?: Mode }
   | { type: "download"; href: string };
 
+/** A small two-column table shown under a reply (e.g. the /help command list). */
+export type ReplyTable = { head: [string, string]; rows: [string, string][]; footnote?: string };
+
 export type Reply = {
   text: string;
+  table?: ReplyTable;
   chips?: string[];
   actions?: ConsoleAction[];
   effect?: Effect;
@@ -204,25 +208,27 @@ function byId(kb: KnowledgeBase, id: string): Reply {
   return intent ? { text: intent.answer, chips: intent.chips, actions: intent.actions } : { text: kb.fallback };
 }
 
-const HELP = `Available commands:
-
-/help         show this list
-/skills       tech stack overview
-/experience   career timeline
-/projects     featured projects
-/contact      ways to get in touch
-/resume       download the résumé
-/theme <name> ${[...ENABLED_THEMES, "light", "dark"].join(" · ")}
-/clear        reset the conversation
-
-Or just ask a question in plain English.`;
+const HELP: ReplyTable = {
+  head: ["Command", "What it does"],
+  rows: [
+    ["/help", "Show this list"],
+    ["/skills", "Tech stack overview"],
+    ["/experience", "Career timeline"],
+    ["/projects", "Featured projects"],
+    ["/contact", "Ways to get in touch"],
+    ["/resume", "Download the résumé"],
+    ["/theme <name>", [...ENABLED_THEMES, "light", "dark"].join(" · ")],
+    ["/clear", "Reset the conversation"],
+  ],
+  footnote: "Or just ask a question in plain English.",
+};
 
 function command(input: string, kb: KnowledgeBase): Reply {
   const [cmd, arg = ""] = input.slice(1).trim().toLowerCase().split(/\s+/);
   switch (cmd) {
     case "help":
     case "?":
-      return { text: HELP };
+      return { text: "Here is what I can do:", table: HELP };
     case "skills":
     case "experience":
     case "projects":

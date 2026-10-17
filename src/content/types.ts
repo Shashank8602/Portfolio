@@ -44,6 +44,8 @@ export type Project = {
   outcome?: string;
   /** Optional bullet list, shown when you don't have a problem/approach/outcome story. */
   highlights?: string[];
+  /** Full-width card with the details in a second column. Use for your 1–2 flagship projects. */
+  featured?: boolean;
   metric?: { value: string; label: string };
   /** Steps rendered as the mini architecture diagram on the card. */
   pipeline: string[];

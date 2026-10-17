@@ -46,12 +46,12 @@ export const profile: Profile = {
     github: "https://github.com/Shashank8602",
   },
 
-  // Every figure below comes from the DevDocs project or the summary line of the résumé.
+  // Every figure below comes from the résumé (summary line, DevDocs) or the Research Radar documentation.
   metrics: [
     { value: 1.5, suffix: "+", label: "Years building LLM-powered apps" },
     { value: 2, prefix: "~", suffix: "s", label: "DevDocs burst-question latency, down from 40+ s" },
     { value: 0.87, label: "DevDocs Recall@5 on tuning data, up from 0.83" },
-    { value: 428, label: "Questions in the DevDocs evaluation benchmark" },
+    { value: 77, prefix: "−", suffix: "%", label: "Research Radar deep-dive peak memory, down from 2.4 GB to 0.56 GB" },
   ],
 
   // Your own list: keep only topics you are genuinely exploring right now.
@@ -133,6 +133,7 @@ export const profile: Profile = {
   projects: [
     {
       title: "DevDocs",
+      featured: true,
       tagline: "RAG assistant for codebases, built with grounded, citable answers.",
       highlights: [
         "Hybrid retrieval pipeline combining Elasticsearch BM25 and vector search with Reciprocal Rank Fusion, plus similarity-based gating that rejects off-topic queries before the LLM is called.",
@@ -145,6 +146,24 @@ export const profile: Profile = {
       pipeline: ["Ingest", "Chunk + embed", "BM25 + vector", "RRF", "Similarity gate", "LLM", "Cited answer"],
       stack: ["Python", "FastAPI", "React", "PostgreSQL", "Elasticsearch", "Docker"],
       // TODO: add links: { github: "https://github.com/Shashank8602/<repo>" } if the repository is public.
+    },
+    {
+      title: "Research Radar",
+      featured: true,
+      tagline: "A personal daily AI-research digest: a nightly LLM pipeline that ranks ~140 items down to 8, plus a cited chat for follow-ups.",
+      highlights: [
+        "Nightly 7-stage batch pipeline (collect, dedupe, filter, judge, diversify, edit, send) that turns ~140 items from six source types (papers, blogs, tool releases, new GitHub repos) into 8 emailed entries, built and run solo on free tiers only ($0/month).",
+        "De-duplicates with pgvector and FastEmbed embeddings (cosine ≥ 0.92) and ranks with a hybrid score (embeddings 0.55, keywords 0.20, recency 0.15, popularity 0.10), then an LLM judge scores relevance, novelty and actionability.",
+        "Provider-agnostic LLM layer (LiteLLM) with a Groq → Gemini → OpenRouter fallback chain, per-call timeouts and Pydantic-validated JSON output, so a rate-limited provider degrades the digest instead of failing it.",
+        "\"Explain in depth\" opens a LangGraph agent with no tools: an SSRF-guarded fetcher, sources fenced as untrusted data, and citation validation that drops any reference the model was not given. A prompt-injection fixture is part of the test suite.",
+        "Cut the deep-dive app's peak memory from 2.4 GB to 0.56 GB (−77%) by profiling ONNX Runtime and finding that FastEmbed's default batch size caused the spike, which made it deployable on a free ~1 GB host.",
+        "One-click vote links use HMAC-signed tokens, a Cloudflare Worker and Postgres row-level security. An offline evaluation harness (precision@k, ROC-AUC, Cohen's kappa), Langfuse tracing and CI with 110 tests back the pipeline.",
+        "Status: a single-user tool. Vote-based ranking is built but switched off until an ablation shows a gain, and the hand-labelled evaluation set is still being built, so no precision figure is reported yet.",
+      ],
+      metric: { value: "−77%", label: "deep-dive peak memory (2.4 → 0.56 GB)" },
+      pipeline: ["Collect", "Dedupe + embed", "Hybrid filter", "LLM judge", "MMR + editor", "Email digest", "Cited deep-dive chat"],
+      stack: ["Python", "LangGraph", "LiteLLM", "PostgreSQL", "pgvector", "Supabase", "Streamlit", "Cloudflare Workers", "GitHub Actions", "Langfuse"],
+      links: { github: "https://github.com/Shashank8602/Research_Radar" },
     },
     {
       title: "RAG Platform for a Banking Client",

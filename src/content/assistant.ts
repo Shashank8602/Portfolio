@@ -164,7 +164,7 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     id: "rag",
     keywords: ["rag", "retrieval", "vector", "embedding", "semantic", "search", "chunk", "rerank", "knowledge", "grounding"],
     examples: ["do you know rag", "experience with retrieval augmented generation", "how do you build rag systems", "vector databases"],
-    answer: `RAG is the core of ${first}'s work.\n\n• At Wipro: an end-to-end RAG platform for a banking client — document ingestion, chunking, indexing and embedding; hybrid retrieval (BM25 + vector search) merged with Reciprocal Rank Fusion and refined by a reranker; streamed answers with source citations.\n• DevDocs: a RAG assistant for codebases with structure-aware chunking, similarity-based gating before the LLM, file-and-line citations and a 428-question evaluation benchmark.\n\nVector search: Qdrant, pgvector, Elasticsearch.`,
+    answer: `RAG is the core of ${first}'s work.\n\n• At Wipro: an end-to-end RAG platform for a banking client — document ingestion, chunking, indexing and embedding; hybrid retrieval (BM25 + vector search) merged with Reciprocal Rank Fusion and refined by a reranker; streamed answers with source citations.\n• DevDocs: a RAG assistant for codebases with structure-aware chunking, similarity-based gating before the LLM, file-and-line citations and a 428-question evaluation benchmark.\n• Research Radar: pgvector de-duplication and hybrid ranking for a nightly AI-research digest, plus a cited deep-dive chat.\n\nVector search: Qdrant, pgvector, Elasticsearch.`,
     chips: p.projects[0] ? [`Tell me about ${p.projects[0].title}`] : undefined,
   });
 
@@ -172,8 +172,8 @@ export function buildKnowledgeBase(p: Profile): KnowledgeBase {
     id: "agents",
     keywords: ["agent", "autonomous", "tool", "function", "calling", "mcp", "orchestration", "multi", "workflow", "langgraph", "agentfabric", "wega"],
     examples: ["have you built ai agents", "experience with agentic ai", "tool calling", "multi agent systems"],
-    answer: `${first} has worked on agentic systems in two places:\n\n• AgentFabric — co-developed an agentic AI platform.\n• WEGA-Studio at Wipro — co-developed an internal application that runs agentic workflows through Factory AI's Droid Exec, integrating Jira and Git over MCP (documentation, user stories, code features, test cases).\n\nSkills: tool and function calling, multi-agent orchestration, LangChain and LangGraph.`,
-    chips: ["Tell me about WEGA-Studio"],
+    answer: `${first} has worked on agentic systems in three places:\n\n• AgentFabric — co-developed an agentic AI platform.\n• Research Radar — a LangGraph deep-dive chat agent with no tools (retrieval happens in code), SSRF-guarded fetching and validated citations.\n• WEGA-Studio at Wipro — co-developed an internal application that runs agentic workflows through Factory AI's Droid Exec, integrating Jira and Git over MCP (documentation, user stories, code features, test cases).\n\nSkills: tool and function calling, multi-agent orchestration, LangChain and LangGraph.`,
+    chips: ["Tell me about Research Radar", "Tell me about WEGA-Studio"],
   });
 
   intents.push({
