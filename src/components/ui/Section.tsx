@@ -18,7 +18,7 @@ export function Section({ id, index, eyebrow, title, description, children, clas
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className={`relative min-h-[calc(100lvh-4rem)] scroll-mt-16 pt-12 pb-16 sm:pt-14 sm:pb-20 ${className}`}
+      className={`relative min-h-[calc(100lvh-4rem)] desktop-mode:min-h-0 scroll-mt-16 pt-12 pb-16 sm:pt-14 sm:pb-20 ${className}`}
     >
       <div className="container-x">
         <Reveal>

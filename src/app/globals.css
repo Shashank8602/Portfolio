@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Phones/tablets in "desktop site" mode report a ~980px-wide but very tall (portrait) viewport. */
+@custom-variant desktop-mode (@media (min-width: 900px) and (orientation: portrait));
+
 /* ------------------------------------------------------------------
    Design tokens. Three themes × two modes, keyed on <html> attributes:
    data-theme="nebula|matrix|sunset"  data-mode="dark|light"

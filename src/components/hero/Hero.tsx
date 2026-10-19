@@ -16,7 +16,7 @@ export function Hero({ profile, kb }: { profile: Profile; kb: KnowledgeBase }) {
     <section
       id="top"
       aria-label="Introduction"
-      className="relative isolate overflow-hidden pt-28 pb-16 sm:pt-32 lg:flex lg:min-h-[100svh] lg:items-center lg:pt-24 lg:pb-14"
+      className="relative isolate overflow-hidden pt-28 pb-16 sm:pt-32 lg:flex lg:min-h-[100svh] desktop-mode:min-h-0 lg:items-center lg:pt-24 lg:pb-14"
     >
       {/* Background: blueprint grid, soft accent glows, live neural network */}
       <div aria-hidden="true" className="absolute inset-0 -z-10">
